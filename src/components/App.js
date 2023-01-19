@@ -9,10 +9,19 @@ function App() {
 
   // Fetch all questions - GET questions
   useEffect(() => {
-    fetchQuestions()
+    const controller = new AbortController()
+    const signal = controller.signal
+    // Effect
+    fetchQuestions(signal)
+    // Cleanup
+    return () => {
+      controller.abort()
+    }
   }, [])
-  const fetchQuestions = () => {
-    fetch("http://localhost:4000/questions")
+  const fetchQuestions = (signal) => {
+    fetch("http://localhost:4000/questions", {
+      signal: signal,
+    })
       .then((response) => response.json())
       .then((data) => {
         setQuestions(() => setQuestions(data))

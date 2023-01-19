@@ -6,7 +6,6 @@ function QuestionList({ questions, handleDeleteQuestion, handleChangeAnswer }) {
     <section>
       <h1>Quiz Questions</h1>
       <ul>
-        {/* GET \questions */}
         {questions.map((question) => (
           <QuestionItem
             key={question.id}
